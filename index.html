@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>AOM Quick Reference — BCA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:       #0B1F4F;
+  --navy-mid:   #142766;
+  --navy-light: #1E3A8A;
+  --teal:       #00C5D5;
+  --teal-dark:  #0099A8;
+  --teal-glow:  rgba(0,197,213,.3);
+  --white:      #FFFFFF;
+  --bg:         #F0F4F9;
+  --card:       #FFFFFF;
+  --border:     #E2E8F0;
+  --text:       #0F172A;
+  --muted:      #64748B;
+  --g50:        #F8FAFC;
+  --g100:       #F1F5F9;
+  --g200:       #E2E8F0;
+  --g300:       #CBD5E1;
+  --g500:       #64748B;
+  --g700:       #334155;
+  --g900:       #0F172A;
+  --red:        #EF4444;
+  --amber:      #F59E0B;
+  --green:      #10B981;
+  --purple:     #8B5CF6;
+  --r-sm:8px; --r:12px; --r-lg:16px; --r-full:999px;
+  --shadow:     0 1px 3px rgba(0,0,0,.06),0 2px 8px rgba(0,0,0,.07);
+  --shadow-md:  0 4px 16px rgba(0,0,0,.10);
+  --shadow-lg:  0 20px 50px rgba(0,0,0,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4,h5{font-family:'Outfit',sans-serif}
+
+/* ── HEADER ─────────────────────────────────────────────────────────── */
+.hdr{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 55%,var(--navy-light) 100%);
+  padding:env(safe-area-inset-top,12px) 16px 0;
+  padding-top:calc(env(safe-area-inset-top,0px) + 12px);
+  position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 24px rgba(0,0,0,.28);
+}
+.hdr-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.brand{display:flex;align-items:center;gap:11px}
+.brand-icon{
+  width:42px;height:42px;
+  background:linear-gradient(135deg,var(--teal) 0%,var(--teal-dark) 100%);
+  border-radius:11px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;flex-shrink:0;
+  box-shadow:0 2px 12px var(--teal-glow);
+}
+.brand-text h1{color:#fff;font-size:16px;font-weight:800;letter-spacing:-.3px;line-height:1.2}
+.brand-text p{color:rgba(255,255,255,.55);font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;margin-top:1px}
+.hdr-btns{display:flex;gap:7px}
+.hdr-btn{
+  width:36px;height:36px;border-radius:10px;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);
+  color:rgba(255,255,255,.8);display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:15px;transition:all .15s;
+}
+.hdr-btn:active{background:rgba(255,255,255,.2);transform:scale(.93)}
+.search-wrap{position:relative;margin-bottom:11px}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.45);font-size:15px;pointer-events:none}
+.search{
+  width:100%;padding:10px 38px 10px 38px;
+  background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.18);
+  border-radius:var(--r-sm);color:#fff;font-size:14px;outline:none;
+  font-family:'DM Sans',sans-serif;transition:all .2s;
+  -webkit-appearance:none;
+}
+.search::placeholder{color:rgba(255,255,255,.45)}
+.search:focus{background:rgba(255,255,255,.17);border-color:var(--teal);box-shadow:0 0 0 3px rgba(0,197,213,.22)}
+.search-x{
+  position:absolute;right:11px;top:50%;transform:translateY(-50%);
+  color:rgba(255,255,255,.55);cursor:pointer;font-size:18px;display:none;
+  padding:2px;
+}
+.tabs-row{
+  display:flex;gap:6px;overflow-x:auto;padding-bottom:12px;
+  scrollbar-width:none;-webkit-overflow-scrolling:touch;
+}
+.tabs-row::-webkit-scrollbar{display:none}
+.tab{
+  flex-shrink:0;padding:5px 13px;border-radius:var(--r-full);
+  font-size:11.5px;font-weight:700;cursor:pointer;
+  border:1.5px solid rgba(255,255,255,.22);color:rgba(255,255,255,.68);
+  background:transparent;transition:all .18s;white-space:nowrap;
+  font-family:'Outfit',sans-serif;letter-spacing:.2px;
+}
+.tab.on{background:var(--teal);border-color:var(--teal);color:#fff;box-shadow:0 2px 10px rgba(0,197,213,.4)}
+.tab:active{transform:scale(.93)}
+
+/* ── MAIN ────────────────────────────────────────────────────────────── */
+.main{padding:14px 14px 100px;max-width:1100px;margin:0 auto}
+.results-bar{font-size:11.5px;color:var(--muted);margin-bottom:12px;font-weight:500}
+.grp-hdr{
+  display:flex;align-items:center;gap:8px;
+  margin:22px 0 10px;
+}
+.grp-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.grp-hdr h2{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--g700)}
+.grp-hdr span{font-size:11px;color:var(--muted);font-weight:500}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(152px,1fr));
+  gap:10px;
+}
+@media(min-width:480px){.grid{grid-template-columns:repeat(auto-fill,minmax(168px,1fr))}}
+@media(min-width:700px){.grid{grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}}
+@media(min-width:1000px){.grid{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}}
+
+/* ── CARD ────────────────────────────────────────────────────────────── */
+.card{
+  background:var(--card);border-radius:var(--r);padding:13px;
+  cursor:pointer;box-shadow:var(--shadow);
+  border:1.5px solid transparent;
+  transition:all .2s;position:relative;overflow:hidden;
+}
+.card:hover{box-shadow:var(--shadow-md);border-color:var(--teal);transform:translateY(-2px)}
+.card:active{transform:scale(.96)}
+.card-bar{
+  position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--r) var(--r) 0 0;
+}
+.card-badges{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:9px}
+.badge{
+  font-size:9.5px;font-weight:800;padding:2px 7px;border-radius:var(--r-full);
+  text-transform:uppercase;letter-spacing:.3px;font-family:'Outfit',sans-serif;
+}
+.b-lt{background:#DCFCE7;color:#166534}
+.b-st{background:#FEF3C7;color:#92400E}
+.b-ol{background:#F1F5F9;color:#475569}
+.b-pl{background:#F3E8FF;color:#6B21A8}
+.b-ctl{background:#FEE2E2;color:#991B1B}
+.card-name{font-size:14.5px;font-weight:800;color:var(--g900);line-height:1.25;margin-bottom:2px;font-family:'Outfit',sans-serif}
+.card-brand{font-size:11.5px;color:var(--muted);margin-bottom:8px;font-style:italic}
+.card-class{font-size:11px;color:var(--g700);font-weight:600;line-height:1.35;margin-bottom:6px}
+.card-foot{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:9px;padding-top:9px;border-top:1px solid var(--g100);
+}
+.eff-pill{font-size:11px;font-weight:800;padding:3px 8px;border-radius:var(--r-full);font-family:'Outfit',sans-serif}
+.e0{background:#F1F5F9;color:#64748B}
+.e1{background:#FEF3C7;color:#92400E}
+.e2{background:#D1FAE5;color:#065F46}
+.e3{background:#6EE7B7;color:#022C22}
+.e4{background:#EDE9FE;color:#5B21B6}
+.card-arr{color:var(--g300);font-size:16px}
+.no-results{text-align:center;padding:64px 20px;color:var(--muted)}
+.no-results .ico{font-size:52px;margin-bottom:12px}
+.no-results h3{font-size:18px;font-weight:700;color:var(--g700);margin-bottom:6px;font-family:'Outfit',sans-serif}
+
+/* ── OVERLAY ─────────────────────────────────────────────────────────── */
+.overlay{
+  position:fixed;inset:0;background:rgba(11,31,79,.55);
+  z-index:200;opacity:0;visibility:hidden;
+  transition:all .28s;backdrop-filter:blur(3px);
+}
+.overlay.on{opacity:1;visibility:visible}
+
+/* ── BOTTOM SHEET ────────────────────────────────────────────────────── */
+.sheet{
+  position:fixed;bottom:0;left:0;right:0;
+  background:var(--white);border-radius:20px 20px 0 0;
+  z-index:201;transform:translateY(105%);
+  transition:transform .38s cubic-bezier(.34,1.4,.64,1);
+  max-height:92vh;display:flex;flex-direction:column;
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+.sheet.on{transform:translateY(0)}
+@media(min-width:700px){
+  .sheet{max-width:580px;left:50%;transform:translateX(-50%) translateY(105%)}
+  .sheet.on{transform:translateX(-50%) translateY(0)}
+}
+.handle{width:38px;height:4px;background:var(--g200);border-radius:2px;margin:11px auto 0;flex-shrink:0}
+.sheet-close{
+  position:absolute;top:14px;right:14px;
+  width:30px;height:30px;border-radius:50%;
+  background:var(--g100);border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;color:var(--g500);z-index:1;transition:all .15s;
+}
+.sheet-close:active{background:var(--g200)}
+
+/* DRUG SHEET HEADER */
+.ds-hdr{padding:14px 18px 0;flex-shrink:0;position:relative}
+.ds-grp-lbl{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px;font-family:'Outfit',sans-serif}
+.ds-name{font-size:22px;font-weight:900;color:var(--navy);line-height:1.15;font-family:'Outfit',sans-serif;margin-bottom:2px}
+.ds-brand{font-size:13px;color:var(--muted);font-style:italic;margin-bottom:10px}
+.ds-badges{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
+.ds-badge{font-size:11px;font-weight:700;padding:4px 10px;border-radius:var(--r-full);font-family:'Outfit',sans-serif}
+.eff-strip{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%);
+  border-radius:var(--r-sm);padding:10px 14px;margin-bottom:0;
+  display:flex;align-items:center;justify-content:space-between;
+  margin:0 18px 14px;flex-shrink:0;
+}
+.eff-strip-l .lbl{font-size:10px;color:rgba(255,255,255,.6);font-weight:700;text-transform:uppercase;letter-spacing:.4px;font-family:'Outfit',sans-serif}
+.eff-strip-l .val{font-size:20px;font-weight:900;color:var(--teal);font-family:'Outfit',sans-serif;line-height:1}
+.eff-strip-r{font-size:11.5px;color:rgba(255,255,255,.65);max-width:56%;text-align:right;line-height:1.4}
+
+/* DETAIL TABS */
+.dtabs{
+  display:flex;border-bottom:1.5px solid var(--g200);
+  padding:0 18px;flex-shrink:0;
+}
+.dtab{
+  flex:1;padding:9px 4px;font-size:12.5px;font-weight:700;
+  color:var(--g500);cursor:pointer;
+  border-bottom:2.5px solid transparent;margin-bottom:-1.5px;
+  text-align:center;transition:all .15s;font-family:'Outfit',sans-serif;
+  letter-spacing:.1px;
+}
+.dtab.on{color:var(--navy);border-bottom-color:var(--teal)}
+.sheet-body{overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch}
+.sheet-body::-webkit-scrollbar{width:3px}
+.sheet-body::-webkit-scrollbar-thumb{background:var(--g200);border-radius:2px}
+.dpanel{display:none;padding:14px 18px 36px}
+.dpanel.on{display:block}
+.dsec-title{
+  font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;
+  color:var(--teal-dark);margin-bottom:8px;font-family:'Outfit',sans-serif;
+}
+.ditem{
+  display:flex;align-items:flex-start;gap:7px;
+  padding:5px 0;font-size:13px;color:var(--g700);line-height:1.5;
+  border-bottom:1px solid var(--g100);
+}
+.ditem:last-child{border-bottom:none}
+.ditem::before{content:'›';color:var(--teal);font-weight:700;flex-shrink:0;font-size:16px;margin-top:-1px}
+.dstep{display:flex;align-items:flex-start;gap:9px;padding:7px 0;border-bottom:1px solid var(--g100)}
+.dstep:last-child{border-bottom:none}
+.dstep-n{
+  width:22px;height:22px;border-radius:50%;
+  background:var(--teal);color:#fff;font-size:11px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  margin-top:1px;font-family:'Outfit',sans-serif;
+}
+.dstep-t{font-size:13px;color:var(--g700);line-height:1.5;flex:1}
+.stop-box{
+  background:linear-gradient(135deg,#FFFBEB,#FEF3C7);
+  border:1px solid #FCD34D;border-radius:var(--r-sm);
+  padding:10px 13px;margin-top:10px;
+}
+.stop-box strong{
+  display:block;font-size:10px;text-transform:uppercase;
+  letter-spacing:.4px;color:#92400E;margin-bottom:4px;
+  font-family:'Outfit',sans-serif;font-weight:800;
+}
+.stop-box p{font-size:12.5px;color:#78350F;line-height:1.5}
+.warn-box{
+  background:#FFF5F5;border:1px solid #FECACA;
+  border-radius:var(--r-sm);padding:10px 13px;margin-bottom:10px;
+  font-size:12.5px;color:#991B1B;line-height:1.5;
+  display:flex;gap:8px;align-items:flex-start;
+}
+.info-box{
+  background:#EFF6FF;border:1px solid #BFDBFE;
+  border-radius:var(--r-sm);padding:10px 13px;
+  font-size:12.5px;color:#1E40AF;line-height:1.5;margin-bottom:10px;
+}
+.dsec{margin-bottom:14px}
+
+/* ── FAB ─────────────────────────────────────────────────────────────── */
+.fab{
+  position:fixed;bottom:24px;right:16px;
+  background:linear-gradient(135deg,var(--teal) 0%,var(--teal-dark) 100%);
+  color:#fff;border:none;border-radius:14px;
+  padding:11px 16px;font-size:13px;font-weight:800;
+  cursor:pointer;box-shadow:0 4px 22px rgba(0,197,213,.45);
+  display:flex;align-items:center;gap:7px;z-index:150;
+  transition:all .2s;font-family:'Outfit',sans-serif;letter-spacing:.2px;
+  bottom:calc(24px + env(safe-area-inset-bottom,0px));
+}
+.fab:active{transform:scale(.95)}
+.fab-dot{
+  width:7px;height:7px;border-radius:50%;background:#fff;
+  opacity:0;transition:opacity .2s;
+}
+.fab.has-sel .fab-dot{opacity:1}
+@keyframes pulse{0%,100%{box-shadow:0 4px 22px rgba(0,197,213,.45)}50%{box-shadow:0 4px 32px rgba(0,197,213,.7)}}
+.fab{animation:pulse 2.5s ease-in-out infinite}
+
+/* ── NEXT STEP SHEET ──────────────────────────────────────────────────── */
+.ns-sheet{
+  position:fixed;bottom:0;left:0;right:0;
+  background:var(--white);border-radius:20px 20px 0 0;
+  z-index:201;transform:translateY(105%);
+  transition:transform .38s cubic-bezier(.34,1.4,.64,1);
+  max-height:94vh;display:flex;flex-direction:column;
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+.ns-sheet.on{transform:translateY(0)}
+@media(min-width:700px){
+  .ns-sheet{max-width:600px;left:50%;transform:translateX(-50%) translateY(105%)}
+  .ns-sheet.on{transform:translateX(-50%) translateY(0)}
+}
+.ns-hdr{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%);
+  padding:20px 18px 16px;border-radius:20px 20px 0 0;flex-shrink:0;position:relative;
+}
+.ns-hdr .handle{background:rgba(255,255,255,.25);margin:0 auto 14px}
+.ns-hdr h2{color:#fff;font-size:19px;font-weight:900;margin-bottom:3px;font-family:'Outfit',sans-serif}
+.ns-hdr p{color:rgba(255,255,255,.65);font-size:12.5px}
+.ns-close{
+  position:absolute;top:14px;right:14px;
+  width:30px;height:30px;border-radius:50%;
+  background:rgba(255,255,255,.15);border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;color:rgba(255,255,255,.8);transition:all .15s;
+}
+.ns-body{overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch;padding:16px 16px 20px}
+.ns-body::-webkit-scrollbar{width:3px}
+.ns-body::-webkit-scrollbar-thumb{background:var(--g200);border-radius:2px}
+.ns-sec-t{
+  font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;
+  color:var(--muted);margin-bottom:9px;font-family:'Outfit',sans-serif;
+}
+.ns-list{display:flex;flex-direction:column;gap:5px;margin-bottom:18px}
+.ns-row{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 13px;border-radius:var(--r-sm);
+  border:1.5px solid var(--g200);cursor:pointer;transition:all .15s;
+}
+.ns-row.sel{border-color:var(--teal);background:rgba(0,197,213,.06)}
+.ns-row-info{flex:1}
+.ns-row-info .nm{font-size:13.5px;font-weight:700;color:var(--g900);font-family:'Outfit',sans-serif}
+.ns-row-info .br{font-size:11.5px;color:var(--muted)}
+.ns-chk{
+  width:22px;height:22px;border-radius:50%;
+  border:2px solid var(--g300);display:flex;align-items:center;
+  justify-content:center;transition:all .15s;flex-shrink:0;font-size:12px;
+}
+.ns-row.sel .ns-chk{background:var(--teal);border-color:var(--teal);color:#fff}
+.ns-empty{text-align:center;padding:28px 16px;color:var(--muted)}
+.ns-empty .ico{font-size:40px;margin-bottom:8px}
+.ns-empty p{font-size:13px}
+
+/* REC CARD */
+.rec-card{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 60%,var(--navy-light) 100%);
+  border-radius:var(--r);padding:16px;color:#fff;margin-bottom:14px;
+  position:relative;overflow:hidden;
+}
+.rec-card::after{
+  content:'';position:absolute;top:-30px;right:-30px;
+  width:120px;height:120px;border-radius:50%;
+  background:rgba(0,197,213,.12);
+}
+.rec-lbl{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--teal);margin-bottom:5px;font-family:'Outfit',sans-serif}
+.rec-name{font-size:21px;font-weight:900;font-family:'Outfit',sans-serif;margin-bottom:2px;line-height:1.15}
+.rec-brand{font-size:12.5px;color:rgba(255,255,255,.6);font-style:italic;margin-bottom:12px}
+.rec-stats{display:flex;gap:8px;margin-bottom:12px}
+.rec-stat{flex:1;background:rgba(255,255,255,.1);border-radius:8px;padding:8px 10px;text-align:center}
+.rec-stat .sl{font-size:9.5px;color:rgba(255,255,255,.55);font-weight:700;text-transform:uppercase;letter-spacing:.3px;font-family:'Outfit',sans-serif}
+.rec-stat .sv{font-size:15px;font-weight:900;color:var(--teal);font-family:'Outfit',sans-serif;line-height:1.15}
+.rec-why{font-size:12.5px;color:rgba(255,255,255,.82);line-height:1.55;margin-bottom:12px}
+.rec-chk-box{background:rgba(255,255,255,.08);border-radius:8px;padding:10px 12px}
+.rec-chk-box .t{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.4px;color:rgba(255,255,255,.55);margin-bottom:6px;font-family:'Outfit',sans-serif}
+.rec-chk-item{font-size:12px;color:rgba(255,255,255,.78);padding:3px 0;display:flex;gap:6px;line-height:1.4}
+.rec-chk-item::before{content:'⚠';font-size:11px;flex-shrink:0;margin-top:1px}
+.btn-view{
+  width:100%;padding:12px;background:var(--teal);
+  color:#fff;border:none;border-radius:var(--r-sm);
+  font-size:14px;font-weight:800;cursor:pointer;margin-top:12px;
+  transition:all .15s;font-family:'Outfit',sans-serif;letter-spacing:.2px;
+}
+.btn-view:active{background:var(--teal-dark)}
+
+/* COMP TABLE */
+.cmp-tbl{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+.cmp-tbl th{background:var(--g100);padding:7px 9px;text-align:left;font-weight:800;color:var(--g700);font-size:10.5px;font-family:'Outfit',sans-serif;letter-spacing:.2px}
+.cmp-tbl td{padding:6px 9px;border-bottom:1px solid var(--g100);vertical-align:top;color:var(--g700);line-height:1.45}
+.cmp-tbl tr:last-child td{border-bottom:none}
+.c-old{color:#DC2626;font-weight:600}
+.c-new{color:#059669;font-weight:600}
+.c-lbl{color:var(--muted);font-size:10.5px;font-weight:600;font-family:'Outfit',sans-serif}
+.divider{height:1px;background:var(--g200);margin:14px 0}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="hdr-top">
+    <div class="brand">
+      <div class="brand-icon">⚕</div>
+      <div class="brand-text">
+        <h1>AOM Quick Reference</h1>
+        <p>Bariatric Centers of America · 2026</p>
+      </div>
+    </div>
+    <div class="hdr-btns">
+      <div class="hdr-btn" id="infoBtn" title="About">ℹ</div>
+    </div>
+  </div>
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input class="search" id="searchInput" type="text" placeholder="Search drug, brand, or mechanism…" autocomplete="off">
+    <span class="search-x" id="searchX">✕</span>
+  </div>
+  <div class="tabs-row" id="tabsRow"></div>
+</header>
+
+<!-- MAIN -->
+<main class="main" id="mainContent">
+  <div class="results-bar" id="resultsBar"></div>
+  <div id="drugList"></div>
+  <div class="no-results hidden" id="noResults">
+    <div class="ico">🔬</div>
+    <h3>No results found</h3>
+    <p>Try a different search term or clear the filter</p>
+  </div>
+</main>
+
+<!-- OVERLAY -->
+<div class="overlay" id="overlay"></div>
+
+<!-- DRUG DETAIL SHEET -->
+<div class="sheet" id="drugSheet">
+  <div class="handle"></div>
+  <button class="sheet-close" id="sheetClose">✕</button>
+  <div class="ds-hdr" id="dsHdr"></div>
+  <div class="eff-strip" id="dsEffStrip"></div>
+  <div class="dtabs" id="dtabs">
+    <div class="dtab on" data-tab="dosing">💊 Dosing</div>
+    <div class="dtab" data-tab="side">⚡ Side Effects</div>
+    <div class="dtab" data-tab="contra">🚫 Contraindications</div>
+  </div>
+  <div class="sheet-body">
+    <div class="dpanel on" id="dpanel-dosing"></div>
+    <div class="dpanel" id="dpanel-side"></div>
+    <div class="dpanel" id="dpanel-contra"></div>
+  </div>
+</div>
+
+<!-- FAB -->
+<button class="fab" id="fabBtn">
+  <div class="fab-dot" id="fabDot"></div>
+  🔄 Tried & Failed?
+</button>
+
+<!-- NEXT STEP SHEET -->
+<div class="ns-sheet" id="nsSheet">
+  <div class="ns-hdr">
+    <div class="handle"></div>
+    <h2>Tried & Failed Tool</h2>
+    <p>Select medications tried. Get a full clinical recommendation.</p>
+    <button class="ns-close" id="nsClose">✕</button>
+  </div>
+  <div class="ns-body" id="nsBody"></div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════════════════
+// DATA
+// ══════════════════════════════════════════════════════════════════════
+const GROUPS = [
+  { id:1, label:"Short-Term Sympathomimetics", color:"#475569", dot:"#64748B" },
+  { id:2, label:"GI Lipase Inhibitor", color:"#DC2626", dot:"#EF4444" },
+  { id:3, label:"Combination Oral (Long-Term)", color:"#0D9488", dot:"#14B8A6" },
+  { id:4, label:"Injectable GLP-1 RAs", color:"#2563EB", dot:"#3B82F6" },
+  { id:5, label:"Dual GIP/GLP-1 (Zepbound)", color:"#0891B2", dot:"#06B6D4" },
+  { id:6, label:"Oral GLP-1 RAs (2025–26)", color:"#16A34A", dot:"#22C55E" },
+  { id:7, label:"MC4R Agonist (Genetic)", color:"#7C3AED", dot:"#8B5CF6" },
+  { id:8, label:"Off-Label Agents", color:"#B45309", dot:"#F59E0B" },
+  { id:9, label:"Pipeline (Not Yet Approved)", color:"#9333EA", dot:"#A855F7" },
+];
+
+const DRUGS = [
+// ── GROUP 1 ──────────────────────────────────────────────────────────
+{ id:"phentermine", group:1, name:"Phentermine", brand:"Adipex-P, Lomaira",
+  class:"Noradrenergic · Schedule IV", fda:"FDA Approved (Short-Term)",
+  badges:[["b-st","ST ≤12 wk"],["b-ctl","Sched IV"]],
+  efficacy:"5–9%", effClass:"e1",
+  dosing:[
+    {step:true,n:1,t:"Adipex-P: 15–37.5 mg orally once daily in the morning"},
+    {step:true,n:2,t:"Lomaira (lower dose): 8 mg orally three times daily before meals"},
+    {step:true,n:3,t:"Take 1–2 hrs before breakfast to minimize insomnia"},
+    {step:true,n:4,t:"FDA label: ≤12 weeks. Widely used off-label longer in combination therapy"},
+    {warn:"Avoid PM dosing — significant insomnia risk. May use off-label longer in Qsymia-like combinations."}
+  ],
+  dosingNote:"Schedule IV controlled — DEA registration required for prescribing",
+  side:[
+    "Tachycardia, palpitations, elevated blood pressure",
+    "Insomnia, restlessness, agitation, anxiety",
+    "Dry mouth, constipation, headache",
+    "Dizziness, unpleasant taste",
+    "Rare (long-term): primary pulmonary hypertension, valvulopathy (historical concern from combination with fenfluramine)"
+  ],
+  contra:[
+    "Cardiovascular disease or uncontrolled hypertension",
+    "Hyperthyroidism or glaucoma",
+    "MAOIs within 14 days",
+    "Pregnancy (Category X)",
+    "History of drug abuse or dependence",
+    "Anxiety or agitation disorders"
+  ],
+  stopRule:"<5% TBW loss at 12 weeks → evaluate continuation",
+  triedNext:["qsymia","liraglutide","semaglutide","tirzepatide"]
+},
+{ id:"diethylpropion", group:1, name:"Diethylpropion", brand:"Tenuate, Tenuate Dospan",
+  class:"Noradrenergic · Schedule IV", fda:"FDA Approved (Short-Term)",
+  badges:[["b-st","ST ≤12 wk"],["b-ctl","Sched IV"]],
+  efficacy:"3–6%", effClass:"e0",
+  dosing:[
+    {step:true,n:1,t:"IR tablets: 25 mg three times daily before meals"},
+    {step:true,n:2,t:"SR (Dospan): 75 mg once daily mid-morning"},
+    {step:true,n:3,t:"≤12 weeks per FDA label"},
+    {info:"Less CNS stimulation than phentermine. Preferred for patients more sensitive to stimulant effects."}
+  ],
+  side:["Palpitations, elevated BP, tachycardia","Insomnia, restlessness, dry mouth","GI upset, constipation","Milder profile than phentermine overall"],
+  contra:["Same as phentermine class","Renal impairment (primarily renally excreted — use caution)","Prior pulmonary hypertension or valvulopathy","MAOIs within 14 days"],
+  stopRule:"<3–5% TBW at 12 weeks → discontinue",
+  triedNext:["phentermine","qsymia","semaglutide"]
+},
+{ id:"phendimetrazine", group:1, name:"Phendimetrazine", brand:"Bontril, Bontril SR",
+  class:"Noradrenergic · Schedule III", fda:"FDA Approved (Short-Term)",
+  badges:[["b-st","ST ≤12 wk"],["b-ctl","Sched III"]],
+  efficacy:"5–8%", effClass:"e1",
+  dosing:[
+    {step:true,n:1,t:"IR: 35 mg orally 2–3 times daily, 1 hr before meals"},
+    {step:true,n:2,t:"SR: 105 mg once daily, 30–60 min before morning meal"},
+    {step:true,n:3,t:"≤12 weeks per FDA label"},
+    {warn:"Schedule III — higher abuse potential than phentermine (Schedule IV). Exercise caution in patients with addiction history."}
+  ],
+  side:["Similar to phentermine: tachycardia, elevated BP, insomnia","Greater overstimulation potential","Renal excretion: monitor renal function","Dry mouth, dizziness, dysgeusia"],
+  contra:["All contraindications of phentermine","Higher abuse/dependence risk than Schedule IV","Renal impairment requires caution","MAOIs within 14 days"],
+  stopRule:"<5% TBW at 12 weeks → discontinue",
+  triedNext:["qsymia","semaglutide","tirzepatide"]
+},
+{ id:"benzphetamine", group:1, name:"Benzphetamine", brand:"Didrex",
+  class:"Noradrenergic · Schedule III", fda:"FDA Approved (Short-Term)",
+  badges:[["b-st","ST ≤12 wk"],["b-ctl","Sched III"]],
+  efficacy:"5–8%", effClass:"e1",
+  dosing:[
+    {step:true,n:1,t:"25–50 mg orally 1–3 times daily; start low and titrate"},
+    {step:true,n:2,t:"≤12 weeks per FDA label"},
+    {warn:"Most potent sympathomimetic of the class. Partial metabolism to amphetamine metabolites. Highest abuse liability. Reserve for patients without addiction history."}
+  ],
+  side:["Strongest CVS effects in class (tachycardia, ↑BP)","Highest risk of insomnia, agitation, euphoria","Amphetamine-like metabolites — dependence risk","Dry mouth, constipation"],
+  contra:["Pregnancy Category X — absolute","Cardiovascular disease, uncontrolled HTN","Anxiety, psychiatric disorders","History of substance abuse","MAOIs within 14 days"],
+  stopRule:"<5% at 12 weeks → discontinue",
+  triedNext:["qsymia","semaglutide","tirzepatide"]
+},
+// ── GROUP 2 ──────────────────────────────────────────────────────────
+{ id:"orlistat", group:2, name:"Orlistat", brand:"Xenical (Rx), Alli (OTC)",
+  class:"GI Lipase Inhibitor · Non-controlled", fda:"FDA Approved (Long-Term)",
+  badges:[["b-lt","LT Approved"],["b-lt","Age ≥12"]],
+  efficacy:"3–5%", effClass:"e0",
+  dosing:[
+    {step:true,n:1,t:"Xenical (Rx): 120 mg orally three times daily with each fat-containing meal"},
+    {step:true,n:2,t:"Alli (OTC): 60 mg orally three times daily with meals"},
+    {step:true,n:3,t:"Skip dose if meal is skipped or contains no fat"},
+    {step:true,n:4,t:"Take a fat-soluble multivitamin (A, D, E, K) daily — separate from orlistat by ≥2 hours"},
+    {info:"No CNS activity. Must adhere to a low-fat diet (<30% calories from fat) to avoid severe GI effects."}
+  ],
+  side:[
+    "Oily/fatty stools (steatorrhea) — most common",
+    "Fecal incontinence, oily spotting on underwear",
+    "Flatulence with oily discharge, increased bowel movements",
+    "Fat-soluble vitamin malabsorption (A, D, E, K) — supplement required",
+    "Rare: severe hepatotoxicity (FDA safety communication 2010)",
+    "GI effects worsened significantly by high-fat meals"
+  ],
+  contra:[
+    "Chronic malabsorption syndrome or cholestasis",
+    "Pregnancy",
+    "Warfarin: ↓ vitamin K absorption → ↑ INR (monitor closely)",
+    "Levothyroxine: separate by ≥4 hours (↓ absorption)",
+    "Antiepileptics (cyclosporine): reduced absorption",
+    "Fat-soluble vitamins: supplement daily at separate time"
+  ],
+  stopRule:"<5% TBW at 12 weeks with adherence → reconsider",
+  triedNext:["qsymia","contrave","semaglutide"]
+},
+// ── GROUP 3 ──────────────────────────────────────────────────────────
+{ id:"qsymia", group:3, name:"Phentermine / Topiramate ER", brand:"Qsymia",
+  class:"Sympathomimetic + Antiepileptic · REMS", fda:"FDA Approved (Long-Term)",
+  badges:[["b-lt","LT Approved"],["b-lt","Age ≥12"],["b-st","REMS"]],
+  efficacy:"8–11%", effClass:"e2",
+  dosing:[
+    {step:true,n:1,t:"Start: 3.75/23 mg orally once daily for 2 weeks"},
+    {step:true,n:2,t:"Wk 3–12: Escalate to 7.5/46 mg QD (standard dose) — assess at week 12"},
+    {step:true,n:3,t:"If <3% loss at wk 12: do NOT escalate; begin taper to discontinue"},
+    {step:true,n:4,t:"If response adequate: may escalate to 11.25/69 mg bridge dose for 2 wk, then 15/92 mg (maximum)"},
+    {step:true,n:5,t:"Morning dosing only. Do NOT stop topiramate abruptly (seizure risk — taper over ≥1 week)"},
+    {warn:"REMS Program: monthly pregnancy test required for women of childbearing potential (teratogenic — cleft lip/palate risk)."}
+  ],
+  dosingNote:"Stop rule: <3% at wk 12 on mid-dose → do not escalate; <5% at wk 12 on max dose → taper and discontinue",
+  side:[
+    "Paresthesia (~28%) — tingling, most common topiramate AE",
+    "Dry mouth (~21%), dysgeusia (altered taste)",
+    "Constipation (~17%), insomnia, dizziness",
+    "Topiramate: cognitive slowing / word-finding difficulty (dose-dependent)",
+    "Topiramate: kidney stones, metabolic acidosis",
+    "Phentermine: heart rate increase (~1–2 bpm), elevated BP",
+    "Mood changes, depression (monitor)"
+  ],
+  contra:[
+    "Pregnancy: REMS — teratogenic (cleft lip/palate). Monthly pregnancy test required.",
+    "Glaucoma (topiramate may increase intraocular pressure)",
+    "Hyperthyroidism",
+    "MAOIs within 14 days",
+    "Suicidality or active mood disorder (monitor carefully)",
+    "Prior kidney stones (topiramate increases risk)",
+    "Abrupt discontinuation — seizure risk from topiramate"
+  ],
+  stopRule:"<3% TBW at wk 12 on mid-dose OR <5% at wk 12 on max → taper/discontinue. Taper topiramate — never stop abruptly.",
+  triedNext:["semaglutide","tirzepatide","contrave"]
+},
+{ id:"contrave", group:3, name:"Naltrexone SR / Bupropion SR", brand:"Contrave",
+  class:"Opioid Antagonist + DNRI · Black Box", fda:"FDA Approved (Long-Term)",
+  badges:[["b-lt","LT Approved"],["b-lt","Age ≥18"],["b-ctl","⚠ Black Box"]],
+  efficacy:"6–8%", effClass:"e1",
+  dosing:[
+    {step:true,n:1,t:"Week 1: 1 tablet (8 mg naltrexone / 90 mg bupropion) once daily in the morning"},
+    {step:true,n:2,t:"Week 2: 1 tablet twice daily (AM and PM)"},
+    {step:true,n:3,t:"Week 3: 2 tablets AM + 1 tablet PM"},
+    {step:true,n:4,t:"Week 4 and beyond: 2 tablets twice daily (maximum: 32/360 mg per day)"},
+    {step:true,n:5,t:"Take with food. Avoid high-fat meals (↑ bupropion exposure)."},
+    {warn:"Black Box: Suicidal thoughts/behaviors (bupropion class). Do NOT use in patients on opioids — will precipitate withdrawal and block analgesia."}
+  ],
+  dosingNote:"Stop rule: <5% TBW at week 12 on full dose — evaluate continuation. Early responders (≥5% at wk 16) have 57% chance of achieving ≥10% at wk 56.",
+  side:[
+    "Nausea (most common, ~32%) — usually improves after wk 4–8",
+    "Headache, insomnia, dizziness",
+    "Constipation, dry mouth, vomiting, diarrhea",
+    "Transient blood pressure increase at initiation (monitor)",
+    "Black Box: suicidal ideation and behavior",
+    "Seizure risk (dose-dependent, bupropion component)"
+  ],
+  contra:[
+    "Seizure disorder (bupropion lowers seizure threshold)",
+    "Bulimia or anorexia nervosa (greatly ↑ seizure risk)",
+    "MAOIs within 14 days",
+    "Chronic opioid use: precipitates acute withdrawal AND blocks opioid analgesia",
+    "Uncontrolled hypertension",
+    "Abrupt alcohol, benzodiazepine, or barbiturate withdrawal",
+    "Hepatic failure"
+  ],
+  stopRule:"<5% TBW at week 12 on full dose (32/360 mg/day) — reassess. Consider discontinuation if <5% at 16 weeks.",
+  triedNext:["semaglutide","tirzepatide","qsymia"]
+},
+// ── GROUP 4 ──────────────────────────────────────────────────────────
+{ id:"liraglutide", group:4, name:"Liraglutide 3.0 mg", brand:"Saxenda",
+  class:"GLP-1 Receptor Agonist · Daily SC Injection", fda:"FDA Approved (Long-Term)",
+  badges:[["b-lt","LT Approved"],["b-lt","Age ≥12"],["b-ctl","⚠ Black Box"]],
+  efficacy:"~8%", effClass:"e1",
+  dosing:[
+    {step:true,n:1,t:"Week 1: 0.6 mg SC once daily (any time)"},
+    {step:true,n:2,t:"Week 2: 1.2 mg SC once daily"},
+    {step:true,n:3,t:"Week 3: 1.8 mg SC once daily"},
+    {step:true,n:4,t:"Week 4: 2.4 mg SC once daily"},
+    {step:true,n:5,t:"Week 5+: 3.0 mg SC once daily (target/maintenance dose)"},
+    {step:true,n:6,t:"Inject SC into abdomen, thigh, or upper arm. Rotate sites. Refrigerate until first use."},
+    {warn:"Black Box: thyroid C-cell tumors (rodent data; unknown human risk). Contraindicated in MEN2 and medullary thyroid carcinoma history."}
+  ],
+  dosingNote:"Stop rule: <4% TBW at 16 weeks on 3.0 mg → discontinue. Early responders (≥5% at wk 12) achieve ~11% at 56 weeks vs ~3% for non-responders.",
+  side:[
+    "Nausea (~40%) — most common, usually transient, peaks during titration",
+    "Vomiting, diarrhea, constipation, abdominal pain",
+    "Injection site reactions (redness, bruising)",
+    "Heart rate increase (~2–3 bpm from baseline)",
+    "Black Box: thyroid C-cell tumors",
+    "Rare: acute pancreatitis, cholelithiasis (gallstones)"
+  ],
+  contra:[
+    "Black Box: personal or family history of medullary thyroid carcinoma",
+    "Multiple Endocrine Neoplasia syndrome type 2 (MEN2)",
+    "Pregnancy",
+    "Prior serious hypersensitivity to liraglutide",
+    "Caution: pancreatitis (prior/active), diabetic retinopathy, renal impairment",
+    "Caution: resting tachycardia or arrhythmia"
+  ],
+  stopRule:"<4% TBW at 16 weeks on 3.0 mg dose → discontinue. Consider switching to semaglutide or tirzepatide.",
+  triedNext:["semaglutide","tirzepatide","qsymia"]
+},
+{ id:"semaglutide", group:4, name:"Semaglutide 2.4 mg SC", brand:"Wegovy",
+  class:"GLP-1 Receptor Agonist · Weekly SC Injection", fda:"FDA Approved (Long-Term)",
+  badges:[["b-lt","LT Approved"],["b-lt","Age ≥12"],["b-lt","CV Indication"],["b-ctl","⚠ Black Box"]],
+  efficacy:"~14.9%", effClass:"e2",
+  dosing:[
+    {step:true,n:1,t:"Month 1: 0.25 mg SC once weekly"},
+    {step:true,n:2,t:"Month 2: 0.5 mg SC once weekly"},
+    {step:true,n:3,t:"Month 3: 1.0 mg SC once weekly"},
+    {step:true,n:4,t:"Month 4: 1.7 mg SC once weekly"},
+    {step:true,n:5,t:"Month 5+: 2.4 mg SC once weekly (maintenance)"},
+    {step:true,n:6,t:"Same day each week. Inject SC abdomen, thigh, or upper arm. Rotate sites. Refrigerate."},
+    {warn:"Discontinue ≥2 months before planned conception. CV indication (2024): reduces MACE in patients with established CVD + obesity/overweight."}
+  ],
+  dosingNote:"Stop rule: <5% TBW at 16 weeks on maintenance dose (1.7 or 2.4 mg) → evaluate continuation. SELECT trial: 20% MACE reduction in high-CV-risk obesity.",
+  side:[
+    "Nausea (~44%), diarrhea (~30%), vomiting (~24%), constipation (~24%)",
+    "Abdominal pain, burping, dyspepsia",
+    "Injection site reactions",
+    "Heart rate increase (mild)",
+    "Black Box: thyroid C-cell tumors",
+    "Rare: acute pancreatitis, cholelithiasis, acute kidney injury (dehydration-related)",
+    "Possible diabetic retinopathy progression (in T2D patients)"
+  ],
+  contra:[
+    "Black Box: personal or family history of medullary thyroid carcinoma or MEN2",
+    "Pancreatitis (prior/active)",
+    "Pregnancy (discontinue ≥2 months before conception)",
+    "Prior serious hypersensitivity to semaglutide",
+    "Caution: delayed gastric emptying reduces oral drug absorption",
+    "Caution: diabetic retinopathy, renal impairment"
+  ],
+  stopRule:"<5% TBW at week 16–20 on maintenance dose → evaluate. Note: In CVD patients (SELECT indication), continuation may be warranted even with modest weight loss due to independent MACE reduction benefit.",
+  triedNext:["tirzepatide","orforglipron","cagrisema"]
+},
+// ── GROUP 5 ──────────────────────────────────────────────────────────
+{ id:"tirzepatide", group:5, name:"Tirzepatide", brand:"Zepbound",
+  class:"Dual GIP + GLP-1 Receptor Agonist · Weekly SC", fda:"FDA Approved (Long-Term)",
+  badges:[["b-lt","LT Approved"],["b-lt","Age ≥18"],["b-lt","OSA Indication"],["b-ctl","⚠ Black Box"]],
+  efficacy:"16–22.5%", effClass:"e3",
+  dosing:[
+    {step:true,n:1,t:"Month 1: 2.5 mg SC once weekly"},
+    {step:true,n:2,t:"Month 2: 5 mg SC once weekly"},
+    {step:true,n:3,t:"Month 3: 7.5 mg SC once weekly"},
+    {step:true,n:4,t:"Month 4: 10 mg SC once weekly"},
+    {step:true,n:5,t:"Month 5: 12.5 mg SC once weekly"},
+    {step:true,n:6,t:"Month 6+: 15 mg SC once weekly (maximum)"},
+    {step:true,n:7,t:"Maintain at maximum tolerated dose (10 or 15 mg). Inject SC abdomen, thigh, or arm."},
+    {warn:"SURMOUNT-4: 82% of patients who stopped tirzepatide regained >25% of lost weight within 1 year. Plan for long-term/indefinite therapy."}
+  ],
+  dosingNote:"Stop rule: <5% TBW at weeks 16–20 on maintenance dose → evaluate. Full therapeutic effect develops over 52–72 weeks. Don't judge efficacy too early.",
+  side:[
+    "Nausea (~31%), diarrhea (~23%), vomiting (~16%), constipation (~12%)",
+    "Abdominal pain — GI effects most pronounced during escalation",
+    "Injection site reactions",
+    "Black Box: thyroid C-cell tumors",
+    "Rare: acute pancreatitis, cholelithiasis, tachycardia, acute kidney injury",
+    "Possible retinopathy progression in T2D"
+  ],
+  contra:[
+    "Black Box: medullary thyroid carcinoma (personal/family history) or MEN2",
+    "Pancreatitis (prior/active)",
+    "Pregnancy",
+    "Prior serious hypersensitivity to tirzepatide",
+    "Do NOT combine with other GLP-1 receptor agonists",
+    "Caution: gastroparesis, renal impairment, diabetic retinopathy"
+  ],
+  stopRule:"<5% TBW at wk 16–20 on 10–15 mg → evaluate. Allow to wk 36 before final non-responder determination given slow plateau. Consider bariatric surgery referral if insufficient response to max dose.",
+  triedNext:["cagrisema","retatrutide","surgery"]
+},
+// ── GROUP 6 ──────────────────────────────────────────────────────────
+{ id:"oralsema", group:6, name:"Oral Semaglutide", brand:"Wegovy (oral tablet)",
+  class:"GLP-1 Receptor Agonist · Daily Oral (SNAC delivery)", fda:"FDA Approved Dec 2025",
+  badges:[["b-lt","LT Approved"],["b-lt","Age ≥18"],["b-lt","NEW 2025"],["b-ctl","⚠ Black Box"]],
+  efficacy:"~13.6%", effClass:"e2",
+  dosing:[
+    {step:true,n:1,t:"Month 1: 3 mg orally once daily"},
+    {step:true,n:2,t:"Month 2: 7 mg orally once daily"},
+    {step:true,n:3,t:"Month 3: 14 mg orally once daily"},
+    {step:true,n:4,t:"Month 4+: 25 mg orally once daily (maintenance)"},
+    {warn:"⚠️ STRICT REQUIREMENTS: Take in the morning ONLY. Empty stomach. Use ≤4 oz (120 mL) WATER ONLY. Wait ≥30 minutes before eating, drinking anything else, or taking other medications. Do NOT crush or chew tablet."},
+    {info:"Key advantage over injectable: no injection required. Key limitation: fasting requirements may be difficult for patients with GERD, gastroparesis, or complex morning routines."}
+  ],
+  dosingNote:"Same GLP-1 mechanism as injectable Wegovy. Lower bioavailability than injectable (SNAC carrier) — efficacy slightly lower. OASIS 4: 13.6% TBW at 64 weeks.",
+  side:[
+    "Nausea, diarrhea, vomiting, constipation (GLP-1 class — same as injectable)",
+    "May worsen GERD or reflux (fasting requirement + tablet swallowing)",
+    "Belching, dyspepsia",
+    "Black Box: thyroid C-cell tumors",
+    "Rare: pancreatitis, cholelithiasis",
+    "Bioavailability reduced if fasting requirements not strictly followed"
+  ],
+  contra:[
+    "Black Box: medullary thyroid carcinoma (personal/family) or MEN2",
+    "Pancreatitis, pregnancy",
+    "GERD or gastroparesis (fasting requirements often intolerable)",
+    "Prior serious hypersensitivity to semaglutide",
+    "All medications taken within 30 min of oral semaglutide may have reduced absorption",
+    "Cannot be taken at same time as other oral medications"
+  ],
+  stopRule:"<5% TBW at wk 16 on maintenance → evaluate. Consider switching to injectable if adherence to fasting requirements is poor.",
+  triedNext:["tirzepatide","orforglipron","cagrisema"]
+},
+{ id:"orforglipron", group:6, name:"Orforglipron", brand:"Foundayo",
+  class:"Oral Non-Peptide GLP-1 Receptor Agonist · Daily Oral", fda:"FDA Approved April 2026",
+  badges:[["b-lt","LT Approved"],["b-lt","Age ≥18"],["b-lt","NEW Apr 2026"],["b-ctl","⚠ Black Box"]],
+  efficacy:"~12.4%", effClass:"e2",
+  dosing:[
+    {step:true,n:1,t:"Month 1: 0.8 mg orally once daily"},
+    {step:true,n:2,t:"Month 2: 2.5 mg orally once daily"},
+    {step:true,n:3,t:"Month 3: 5.5 mg orally once daily"},
+    {step:true,n:4,t:"Month 4: 9 mg orally once daily"},
+    {step:true,n:5,t:"Month 5: 14.5 mg orally once daily"},
+    {step:true,n:6,t:"Month 6+: 17.2 mg orally once daily (maximum)"},
+    {info:"✅ KEY ADVANTAGE: Can be taken ANY time of day, WITH or WITHOUT food, NO water restrictions. No fasting required. True 'take-anywhere' pill. Self-pay: ~$149/mo lowest dose; $25 copay for commercial insurance."}
+  ],
+  dosingNote:"First non-peptide oral GLP-1 agonist. Small molecule binds GLP-1 receptor via allosteric mechanism — no SNAC carrier needed. ATTAIN-1 trial: 12.4% TBW at 72 weeks (ITT).",
+  side:[
+    "Nausea, diarrhea, vomiting, constipation (GLP-1 class AEs — same profile as injectable)",
+    "GI adverse events typically improve after wk 4–8",
+    "Black Box: thyroid C-cell tumors",
+    "Rare: pancreatitis, cholelithiasis",
+    "Delayed gastric emptying may affect absorption of other oral medications"
+  ],
+  contra:[
+    "Black Box: medullary thyroid carcinoma (personal/family) or MEN2",
+    "Pancreatitis (prior/active), pregnancy",
+    "Do NOT use with other GLP-1 receptor agonists",
+    "Prior serious hypersensitivity",
+    "Caution: renal or hepatic impairment (monitor)",
+    "Caution: medications with narrow therapeutic window — gastric emptying effects"
+  ],
+  stopRule:"<5% TBW at wk 16 on maintenance → evaluate. Consider escalation to injectable tirzepatide or semaglutide for patients needing greater efficacy.",
+  triedNext:["semaglutide","tirzepatide","cagrisema"]
+},
+// ── GROUP 7 ──────────────────────────────────────────────────────────
+{ id:"setmelanotide", group:7, name:"Setmelanotide", brand:"Imcivree",
+  class:"MC4R Agonist · SC Injection · Genetic Obesity Only", fda:"FDA Approved (2020–2026)",
+  badges:[["b-lt","LT Approved"],["b-lt","Age ≥2–4"],["b-pl","Genetic Only"]],
+  efficacy:"~25% (genetic)",effClass:"e4",
+  dosing:[
+    {step:true,n:1,t:"Start: 0.5 mg SC once daily for 2 weeks"},
+    {step:true,n:2,t:"Increase to 1.0 mg SC QD × 2 wk, then 1.5 mg, 2.0 mg, 2.5 mg (each × 2 wk if tolerated)"},
+    {step:true,n:3,t:"Maximum: 3.0 mg SC once daily"},
+    {step:true,n:4,t:"Pediatric dosing: weight-based per prescribing information"},
+    {warn:"⚠️ CRITICAL: Setmelanotide is NOT effective for common polygenic/general obesity. Genetic testing confirming MC4R pathway deficiency is REQUIRED before prescribing. Indications: POMC deficiency, PCSK1 deficiency, LEPR deficiency, Bardet-Biedl syndrome, or acquired hypothalamic obesity."}
+  ],
+  dosingNote:"Refer patients with hyperphagia since childhood + rapid-onset obesity + family history to genetics for pathway testing before considering this agent.",
+  side:[
+    "Skin hyperpigmentation (VERY COMMON — MC4R activation stimulates melanocytes)",
+    "Injection site reactions",
+    "Nausea, headache, diarrhea, abdominal pain",
+    "Disturbance in sexual arousal: spontaneous penile erections in males (seek ER if >4 hours)",
+    "Sexual adverse reactions in females",
+    "Depression, suicidal ideation — monitor carefully"
+  ],
+  contra:[
+    "Prior serious hypersensitivity (anaphylaxis) to setmelanotide",
+    "NOT indicated for non-genetic/polygenic obesity",
+    "Benzyl alcohol preservative: NOT for neonates or low birth-weight infants",
+    "Depression or suicidal ideation: monitor and consider discontinuation",
+    "Monitor growth (height/weight) in pediatric patients"
+  ],
+  stopRule:"Assess hyperphagia scores and weight at 16 weeks. If no improvement in hunger/weight vs baseline — re-evaluate diagnosis and genetics report.",
+  triedNext:["surgery","genetics_referral"]
+},
+// ── GROUP 8 ──────────────────────────────────────────────────────────
+{ id:"metformin", group:8, name:"Metformin", brand:"Glucophage, generics",
+  class:"Biguanide · Off-Label for Obesity", fda:"Off-Label (FDA approved for T2D)",
+  badges:[["b-ol","Off-Label"],["b-lt","Non-controlled"]],
+  efficacy:"1–3 kg", effClass:"e0",
+  dosing:[
+    {step:true,n:1,t:"Start: 500 mg orally once or twice daily with meals"},
+    {step:true,n:2,t:"Increase by 500 mg weekly to target 1500–2000 mg/day in divided doses"},
+    {step:true,n:3,t:"ER formulation: better GI tolerability — 500–2000 mg once daily with evening meal"},
+    {info:"DPP trial: 31% reduction in T2D risk in prediabetes. Most useful as adjunct in prediabetic patients with obesity — not a primary weight loss medication."},
+    {warn:"Hold before IV contrast administration. Resume 48 hours after if renal function normal."}
+  ],
+  dosingNote:"Primary value in obesity: T2D prevention in prediabetes, modest weight neutrality vs weight-gaining alternatives (insulin, sulfonylureas). Not a substitute for dedicated obesity pharmacotherapy.",
+  side:[
+    "GI: nausea, diarrhea, abdominal cramping — common at initiation, take with food",
+    "Usually self-limiting with slow titration and ER formulation",
+    "Vitamin B12 depletion — monitor annually with CBC",
+    "Metallic taste",
+    "Rare but serious: lactic acidosis (risk ↑ with renal impairment, contrast, hepatic failure, alcohol)"
+  ],
+  contra:[
+    "eGFR <30 mL/min: contraindicated (lactic acidosis risk)",
+    "eGFR 30–45: use with caution — many guidelines contraindicate",
+    "IV contrast: hold day of procedure and 48 hrs after (risk of contrast-induced nephropathy + lactic acidosis)",
+    "Hepatic impairment, decompensated heart failure",
+    "Alcohol excess (↑ lactic acidosis risk)",
+    "Pregnancy: compatible for gestational DM; off-label in obesity"
+  ],
+  stopRule:"Not used as primary obesity therapy. Reassess if GI effects persist beyond 8 weeks or eGFR declines.",
+  triedNext:["qsymia","contrave","semaglutide"]
+},
+{ id:"topiramate", group:8, name:"Topiramate", brand:"Topamax, generics",
+  class:"Antiepileptic · Off-Label for Obesity", fda:"Off-Label (FDA approved epilepsy/migraine)",
+  badges:[["b-ol","Off-Label"],["b-lt","Non-controlled"]],
+  efficacy:"3–6%", effClass:"e1",
+  dosing:[
+    {step:true,n:1,t:"Start: 25 mg orally once daily for 1 week"},
+    {step:true,n:2,t:"Increase by 25 mg/week: target 50 mg BID to 100 mg BID"},
+    {step:true,n:3,t:"Maximum off-label obesity dose: 200 mg/day in divided doses"},
+    {step:true,n:4,t:"SLOW titration is critical — minimizes cognitive adverse effects"},
+    {warn:"DO NOT stop abruptly — seizure risk even in non-epileptic patients. Taper over ≥1 week when discontinuing."}
+  ],
+  dosingNote:"Note: Topiramate monotherapy has significant cognitive side effects at doses needed for meaningful weight loss. Combination with phentermine (Qsymia) achieves better weight loss at lower topiramate doses with more tolerable cognitive profile.",
+  side:[
+    "Paresthesia (tingling, very common) — usually benign",
+    "Cognitive impairment / word-finding difficulty / 'brain fog' — dose-dependent and dose-limiting",
+    "Kidney stones (carbonic anhydrase inhibition promotes calcium phosphate crystallization)",
+    "Metabolic acidosis — monitor serum bicarbonate",
+    "Decreased sweating (hyperthermia risk in heat/exercise)",
+    "Mood changes, depression, irritability",
+    "Reduced appetite (therapeutic but also an adverse effect)"
+  ],
+  contra:[
+    "Pregnancy Category D: teratogenic (cleft lip/palate) — require contraception",
+    "History of kidney stones",
+    "Narrow-angle glaucoma",
+    "Hepatic impairment",
+    "Abrupt discontinuation — seizure risk (even in non-epileptic patients)",
+    "Caution: patients with metabolic acidosis risk or renal impairment"
+  ],
+  stopRule:"Reassess at 12 weeks. Taper rather than stop abruptly. Prefer Qsymia (combination) for better efficacy/tolerability ratio.",
+  triedNext:["qsymia","semaglutide","tirzepatide"]
+},
+{ id:"bupropion", group:8, name:"Bupropion", brand:"Wellbutrin SR/XL, generics",
+  class:"DNRI · Off-Label for Obesity", fda:"Off-Label (FDA: MDD, smoking cessation)",
+  badges:[["b-ol","Off-Label"],["b-lt","Non-controlled"]],
+  efficacy:"2–4%", effClass:"e0",
+  dosing:[
+    {step:true,n:1,t:"SR: 150 mg orally once daily for 3 days, then 150 mg twice daily"},
+    {step:true,n:2,t:"XL: 150 mg orally once daily, increase to 300 mg once daily after 3–4 days"},
+    {step:true,n:3,t:"Take in the morning (+ noon for SR) — avoid evening dosing (insomnia)"},
+    {info:"Most effective in combination with naltrexone (see Contrave). Monotherapy also useful in patients with comorbid depression + obesity, or as bridge therapy."},
+    {warn:"Do not use with other bupropion-containing products. Maximum dose 300 mg/day for XL; 450 mg/day for SR (weight management doses rarely exceed 300 mg/day)."}
+  ],
+  dosingNote:"Particularly useful when obesity coexists with depression or smoking cessation need — addresses multiple indications simultaneously.",
+  side:[
+    "Dry mouth, insomnia, headache, nausea",
+    "Agitation, anxiety, restlessness",
+    "Constipation, elevated blood pressure",
+    "Seizure risk (dose-dependent: ~0.4% at 300 mg/day)",
+    "Mood changes",
+    "Black Box: suicidal ideation (antidepressant class)"
+  ],
+  contra:[
+    "Seizure disorder (bupropion significantly lowers seizure threshold)",
+    "Bulimia or anorexia nervosa (major ↑ seizure risk)",
+    "MAOIs within 14 days",
+    "Other bupropion-containing products (dose accumulation)",
+    "Uncontrolled hypertension",
+    "Abrupt alcohol, benzodiazepine, or sedative-hypnotic withdrawal",
+    "Black Box: suicidality monitoring required (antidepressant class)"
+  ],
+  stopRule:"Reassess at 12 weeks. Combination with naltrexone (Contrave) typically preferred over monotherapy for obesity.",
+  triedNext:["contrave","semaglutide","tirzepatide"]
+},
+// ── GROUP 9 ──────────────────────────────────────────────────────────
+{ id:"cagrisema", group:9, name:"CagriSema", brand:"(Novo Nordisk — NDA Filed Dec 2025)",
+  class:"GLP-1 RA + Amylin Analogue · Weekly SC", fda:"Investigational — NDA Filed",
+  badges:[["b-pl","NDA Filed"],["b-pl","Phase 3 ✓"],["b-pl","FDA Review 2026"]],
+  efficacy:"~22.7%", effClass:"e4",
+  dosing:[
+    {step:true,n:1,t:"SC injection once weekly (fixed-dose combination: cagrilintide 2.4 mg + semaglutide 2.4 mg)"},
+    {step:true,n:2,t:"Anticipated titration similar to injectable semaglutide (monthly dose escalation)"},
+    {warn:"⚠️ NOT FDA-APPROVED as of May 2026. Available ONLY in clinical trials. NDA submitted December 2025. FDA review expected 2026–2027. Do not prescribe outside trials."}
+  ],
+  dosingNote:"REDEFINE 1: 22.7% TBW at 68 weeks (efficacy estimand). Exceeds semaglutide alone (16.1%) and cagrilintide alone (11.8%) — true pharmacological synergy. 60% achieved ≥20% TBW loss; 23% achieved ≥30%.",
+  side:[
+    "GLP-1 component: nausea, vomiting, diarrhea, constipation (class effects)",
+    "Amylin component: additional GI effects possible",
+    "Anticipated Black Box: thyroid C-cell tumors (GLP-1 class)",
+    "Full safety profile pending FDA-approved label"
+  ],
+  contra:[
+    "Anticipated: MEN2, medullary thyroid carcinoma, pancreatitis, pregnancy",
+    "Full contraindication profile pending FDA approval",
+    "Do not prescribe outside approved clinical trial context — no approved label exists"
+  ],
+  stopRule:"Not applicable — not currently prescribable outside trials.",
+  triedNext:["retatrutide","surgery"]
+},
+{ id:"retatrutide", group:9, name:"Retatrutide", brand:"(Eli Lilly — Phase 3 TRIUMPH)",
+  class:"Triple GIP + GLP-1 + Glucagon Agonist · Weekly SC", fda:"Investigational — Phase 3",
+  badges:[["b-pl","Phase 3 ✓"],["b-pl","NDA Est. 2026–27"],["b-pl","Triple Agonist"]],
+  efficacy:"~30.3%", effClass:"e4",
+  dosing:[
+    {step:true,n:1,t:"SC injection once weekly (doses studied: 4 mg, 9 mg, 12 mg)"},
+    {step:true,n:2,t:"Titration schedule not yet finalized for commercial label"},
+    {warn:"⚠️ NOT FDA-APPROVED as of May 2026. Available ONLY in TRIUMPH clinical trials. NDA filing expected 2026–2027. FDA approval estimated 2027. Do not prescribe outside trials."}
+  ],
+  dosingNote:"TRIUMPH-1 (May 2026): 30.3% TBW at 80 weeks (12 mg efficacy estimand) — highest ever reported in a Phase 3 obesity trial. 65.3% achieved BMI <30 by week 80. Novel AE: dysesthesia (~21%).",
+  side:[
+    "GLP-1/GIP class: nausea, vomiting, diarrhea, constipation",
+    "NOVEL — Dysesthesia (~21%): abnormal skin sensations (tingling/burning) — likely glucagon receptor-related",
+    "Tachycardia (glucagon component — monitor HR)",
+    "Higher GI AE rates and discontinuation rate than tirzepatide",
+    "Anticipated Black Box: thyroid C-cell tumors",
+    "Full safety profile pending FDA review"
+  ],
+  contra:[
+    "Anticipated: MEN2, medullary thyroid carcinoma, pancreatitis, pregnancy",
+    "Glucagon component: monitor heart rate; caution in tachyarrhythmia",
+    "Full contraindication profile pending Phase 3 completion and FDA label",
+    "Do not prescribe outside approved clinical trial context"
+  ],
+  stopRule:"Not applicable — not currently prescribable outside trials.",
+  triedNext:["surgery","genetics_referral"]
+}
+];
+
+// ══════════════════════════════════════════════════════════════════════
+// RECOMMENDATION ENGINE
+// ══════════════════════════════════════════════════════════════════════
+const RECS = {
+  phentermine:{
+    next:"qsymia",
+    why:"Phentermine monotherapy is FDA-labeled for ≤12 weeks. Adding extended-release topiramate (Qsymia) leverages your patient's established phentermine tolerance while adding a second complementary mechanism — GABA/glutamate modulation — producing synergistic weight loss with greater durability. This is the most logical step-up from phentermine alone.",
+    contra_check:["Pregnancy / childbearing potential (REMS required)","History of kidney stones (topiramate risk)","Active suicidal ideation or mood disorder","Glaucoma"],
+    prev_eff:"5–9%", next_eff:"8–11%"
+  },
+  diethylpropion:{
+    next:"qsymia",
+    why:"Diethylpropion's efficacy is modest (~3–6%). Qsymia provides phentermine's more potent sympathomimetic effect combined with topiramate's dual mechanism, achieving more than double the weight loss of diethylpropion at approved doses.",
+    contra_check:["Pregnancy / REMS requirement","History of seizures or mood disorders","Kidney stones"],
+    prev_eff:"3–6%", next_eff:"8–11%"
+  },
+  phendimetrazine:{
+    next:"qsymia",
+    why:"Stepping from Schedule III phendimetrazine monotherapy to a non-controlled fixed-dose combination reduces scheduling concerns while increasing efficacy. Qsymia's topiramate component addresses appetite through an entirely different CNS pathway, producing additive results.",
+    contra_check:["Pregnancy / REMS","Kidney stones","Active glaucoma","Mood disorder history"],
+    prev_eff:"5–8%", next_eff:"8–11%"
+  },
+  benzphetamine:{
+    next:"semaglutide",
+    why:"Benzphetamine carries significant addiction liability as a Schedule III prodrug with amphetamine metabolites. The preferred next step is a GLP-1 receptor agonist, which is non-controlled, has a strong evidence base, and produces 2–4× greater weight loss without stimulant side effects. Semaglutide also offers cardiovascular benefits in high-risk patients.",
+    contra_check:["Thyroid C-cell tumor history or MEN2","Active pancreatitis","Pregnancy"],
+    prev_eff:"5–8%", next_eff:"~14.9%"
+  },
+  orlistat:{
+    next:"qsymia",
+    why:"Orlistat's purely peripheral mechanism (fat malabsorption) is mechanistically unrelated to any central appetite pathway. Patients failing orlistat likely need central appetite suppression. Qsymia is the most effective oral option. If the patient has established CVD or preference for injectable therapy, consider semaglutide directly.",
+    contra_check:["Pregnancy / REMS","Active mood disorder or suicidality","Topiramate history of kidney stones"],
+    prev_eff:"3–5%", next_eff:"8–11%"
+  },
+  qsymia:{
+    next:"semaglutide",
+    why:"After failing phentermine/topiramate ER, transitioning to a GLP-1 receptor agonist targets entirely different pathways — incretin-mediated appetite suppression, vagal satiety signaling, and gastric emptying — producing nearly double the weight loss (14.9% vs ~10%). For patients with established CVD, semaglutide additionally reduces MACE by 20% (SELECT trial), providing dual therapeutic benefit.",
+    contra_check:["Thyroid C-cell tumor history or MEN2","Active pancreatitis","Pregnancy (discontinue ≥2 months before conception)","Gastroparesis"],
+    prev_eff:"8–11%", next_eff:"~14.9%"
+  },
+  contrave:{
+    next:"semaglutide",
+    why:"Naltrexone/bupropion targets the hypothalamic opioid-melanocortin pathway and mesolimbic reward circuits. After failing this mechanism, GLP-1 receptor agonism offers a completely different and more potent approach — central appetite suppression via incretin signaling producing ~2.5× greater weight loss. Note: naltrexone in Contrave should be tapered before starting semaglutide (no pharmacological interaction, but opioid reversal function needs to be considered).",
+    contra_check:["Thyroid C-cell tumor history or MEN2","Active pancreatitis","Pregnancy"],
+    prev_eff:"6–8%", next_eff:"~14.9%"
+  },
+  liraglutide:{
+    next:"semaglutide",
+    why:"Liraglutide (daily injection) and semaglutide (weekly injection) share the GLP-1 receptor mechanism, but semaglutide's modified structure produces ~2× greater weight loss due to superior receptor binding, longer half-life, and greater CNS penetration. STEP 1 demonstrated 14.9% vs 8% for liraglutide. The transition also simplifies dosing from daily to once-weekly.",
+    contra_check:["Same class contraindications apply (MEN2, thyroid ca, pancreatitis)","No new contraindications vs liraglutide"],
+    prev_eff:"~8%", next_eff:"~14.9%"
+  },
+  semaglutide:{
+    next:"tirzepatide",
+    why:"After adequate trial of GLP-1 monotherapy, the next step is dual GIP+GLP-1 receptor agonism (tirzepatide). Adding GIP receptor activation synergistically amplifies hypothalamic satiety signaling while also improving peripheral insulin sensitivity and fat lipolysis. SURMOUNT-1 demonstrated 22.5% TBW loss vs 14.9% for semaglutide — a meaningful incremental benefit. Many patients who had sub-optimal semaglutide responses achieve excellent results with tirzepatide.",
+    contra_check:["Same class contraindications (MEN2, thyroid ca, pancreatitis)","Do NOT use simultaneously — stop semaglutide before starting","Gastroparesis"],
+    prev_eff:"~14.9%", next_eff:"16–22.5%"
+  },
+  oralsema:{
+    next:"tirzepatide",
+    why:"After failing oral semaglutide, tirzepatide's dual GIP+GLP-1 mechanism offers substantially greater efficacy. If oral route preference is strong, orforglipron (oral GLP-1 without fasting restrictions) may be an alternative — though for maximum efficacy, injectable tirzepatide is the next clinical step.",
+    contra_check:["Same class contraindications","Do NOT combine with another GLP-1 RA"],
+    prev_eff:"~13.6%", next_eff:"16–22.5%"
+  },
+  orforglipron:{
+    next:"semaglutide",
+    why:"Orforglipron and injectable semaglutide share the GLP-1 mechanism, but injectable semaglutide may achieve slightly higher serum levels and has more extensive long-term outcome data (SELECT trial: 20% MACE reduction). Alternatively, escalate directly to tirzepatide for maximum efficacy. If the patient prefers oral route, note that no oral dual-incretin option currently exists.",
+    contra_check:["Same GLP-1 class contraindications","Do NOT use with other GLP-1 RAs"],
+    prev_eff:"~12.4%", next_eff:"16–22.5%"
+  },
+  tirzepatide:{
+    next:"cagrisema",
+    why:"Tirzepatide represents the current ceiling of approved pharmacotherapy. After failure at maximum tolerated dose (15 mg), the next pharmacological option is pipeline combination therapy. CagriSema (NDA filed) adds amylin pathway activation to semaglutide, achieving ~22.7% TBW loss — potentially available late 2026 or 2027. Retatrutide (triple agonist, Phase 3) shows ~30% TBW loss. For immediate options: bariatric surgery referral is strongly warranted for patients with BMI ≥35 with comorbidities or BMI ≥40.",
+    contra_check:["Consider bariatric surgery evaluation if BMI ≥35 with comorbidities","CagriSema and retatrutide not yet prescribable — only in trials","Genetic testing if hyperphagia since childhood"],
+    prev_eff:"16–22.5%", next_eff:"~22.7% (CagriSema, pipeline)"
+  },
+  setmelanotide:{
+    next:null,
+    why:"Setmelanotide is highly specific to MC4R pathway genetic deficiencies. If response is inadequate, re-verify the genetic diagnosis (confirm variant pathogenicity). Consider endocrinology/genetics consultation. For patients with confirmed genetic obesity who have partial response, dose optimization is the primary strategy. Bariatric surgery outcomes are variable in genetic obesity syndromes.",
+    contra_check:["Confirm genetic diagnosis before discontinuing","Bariatric surgery consultation for refractory cases","Consider psychology/behavioral support for hyperphagia management"],
+    prev_eff:"~25% (genetic)", next_eff:"N/A"
+  },
+  metformin:{
+    next:"qsymia",
+    why:"Metformin is not a primary obesity medication. After failing metformin-augmented lifestyle therapy, transition to dedicated anti-obesity pharmacotherapy. Qsymia is the most effective oral option for patients preferring to avoid injections. For patients with prediabetes, semaglutide or tirzepatide offer superior weight loss AND strong T2D prevention data.",
+    contra_check:["Pregnancy / REMS for Qsymia","Active mood disorder if Qsymia considered","Renal function (eGFR) check before adding/switching"],
+    prev_eff:"1–3 kg", next_eff:"8–11%"
+  },
+  topiramate:{
+    next:"qsymia",
+    why:"Topiramate monotherapy at doses sufficient for weight loss (~200 mg/day) produces significant cognitive side effects that limit its use. Qsymia combines topiramate with phentermine at lower topiramate doses — achieving better weight loss with a more tolerable cognitive profile due to dose-synergy.",
+    contra_check:["Pregnancy / REMS","Active mood disorder","Kidney stones (topiramate ongoing risk)"],
+    prev_eff:"3–6%", next_eff:"8–11%"
+  },
+  bupropion:{
+    next:"contrave",
+    why:"Bupropion monotherapy produces modest weight loss (2–4%). Adding naltrexone creates Contrave — blocking the opioid autoinhibitory feedback on POMC neurons, sustaining and amplifying bupropion's anorectic effect. Contrave produces ~6–8% TBW loss vs 2–4% for bupropion alone. If the patient has established opioid use disorder or chronic pain requiring opioids, naltrexone cannot be added — escalate to GLP-1 RA class instead.",
+    contra_check:["Opioid use (naltrexone contraindicated — use GLP-1 RA instead)","Active seizure disorder","Bulimia/anorexia"],
+    prev_eff:"2–4%", next_eff:"6–8%"
+  },
+  cagrisema:{next:null, why:"Not yet approved. Only available in clinical trials. For patients with inadequate response to approved therapies, refer to ClinicalTrials.gov for active REDEFINE program sites.", contra_check:[], prev_eff:"N/A",next_eff:"N/A"},
+  retatrutide:{next:null, why:"Not yet approved. Only available in TRIUMPH clinical trials. Refer to ClinicalTrials.gov.", contra_check:[], prev_eff:"N/A",next_eff:"N/A"}
+};
+
+function getDrugById(id){ return DRUGS.find(d=>d.id===id) }
+
+// ══════════════════════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════════════════════
+let state = {
+  tab:'all',
+  search:'',
+  openDrug:null,
+  activeDtab:'dosing',
+  nsOpen:false,
+  nsSelected:new Set(),
+};
+
+// ══════════════════════════════════════════════════════════════════════
+// RENDER HELPERS
+// ══════════════════════════════════════════════════════════════════════
+function getBadgeHtml(b){ return `<span class="badge ${b[0]}">${b[1]}</span>` }
+
+function renderTabs(){
+  const tr = document.getElementById('tabsRow');
+  const tabs = [{id:'all',label:'All Drugs'},...GROUPS.map(g=>({id:'g'+g.id,label:g.label}))];
+  tr.innerHTML = tabs.map(t=>`<div class="tab${state.tab===t.id?' on':''}" data-tab="${t.id}">${t.label}</div>`).join('');
+  tr.querySelectorAll('.tab').forEach(el=>el.addEventListener('click',()=>{
+    state.tab=el.dataset.tab; state.search='';
+    document.getElementById('searchInput').value='';
+    document.getElementById('searchX').style.display='none';
+    renderTabs(); renderDrugs();
+  }));
+}
+
+function filterDrugs(){
+  let list = DRUGS;
+  if(state.tab!=='all') list = list.filter(d=>'g'+d.group===state.tab);
+  if(state.search){
+    const q=state.search.toLowerCase();
+    list=list.filter(d=>
+      d.name.toLowerCase().includes(q)||
+      d.brand.toLowerCase().includes(q)||
+      d.class.toLowerCase().includes(q)||
+      (d.dosing||[]).some(x=>x.t&&x.t.toLowerCase().includes(q))
+    );
+  }
+  return list;
+}
+
+function cardHtml(d){
+  const g = GROUPS.find(g=>g.id===d.group);
+  return `
+  <div class="card group-${d.group}" data-id="${d.id}" style="cursor:pointer" role="button" tabindex="0" aria-label="Open ${d.name}">
+    <div class="card-bar" style="background:${g?g.color:'#64748B'}"></div>
+    <div class="card-badges">${d.badges.map(getBadgeHtml).join('')}</div>
+    <div class="card-name">${d.name}</div>
+    <div class="card-brand">${d.brand}</div>
+    <div class="card-class">${d.class}</div>
+    <div class="card-foot">
+      <span class="eff-pill ${d.effClass}">${d.efficacy}</span>
+      <span class="card-arr">›</span>
+    </div>
+  </div>`;
+}
+
+function renderDrugs(){
+  const list = filterDrugs();
+  const noRes = document.getElementById('noResults');
+  const dl = document.getElementById('drugList');
+  const rb = document.getElementById('resultsBar');
+  rb.textContent = state.search
+    ? `${list.length} result${list.length!==1?'s':''} for "${state.search}"`
+    : `${list.length} medication${list.length!==1?'s':''}`;
+
+  if(!list.length){ dl.innerHTML=''; noRes.classList.remove('hidden'); return; }
+  noRes.classList.add('hidden');
+
+  if(state.tab==='all' && !state.search){
+    // Group by class
+    let html='';
+    GROUPS.forEach(g=>{
+      const gd=list.filter(d=>d.group===g.id);
+      if(!gd.length) return;
+      html+=`<div class="grp-hdr"><div class="grp-dot" style="background:${g.dot}"></div><h2>${g.label}</h2><span>(${gd.length})</span></div>`;
+      html+=`<div class="grid">${gd.map(cardHtml).join('')}</div>`;
+    });
+    dl.innerHTML=html;
+  } else {
+    dl.innerHTML=`<div class="grid">${list.map(cardHtml).join('')}</div>`;
+  }
+
+  dl.querySelectorAll('.card').forEach(el=>{
+    const open=()=>openDrug(el.dataset.id);
+    el.addEventListener('click',open);
+    el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')open()});
+  });
+}
+
+// ══════════════════════════════════════════════════════════════════════
+// DRUG SHEET
+// ══════════════════════════════════════════════════════════════════════
+function dosingHtml(d){
+  let h='';
+  const steps = (d.dosing||[]).filter(x=>x.step);
+  const notes = (d.dosing||[]).filter(x=>!x.step);
+  if(steps.length){
+    h+=`<div class="dsec"><div class="dsec-title">Dosing Steps</div>`;
+    h+=steps.map(x=>`<div class="dstep"><div class="dstep-n">${x.n}</div><div class="dstep-t">${x.t}</div></div>`).join('');
+    h+='</div>';
+  }
+  notes.forEach(x=>{
+    if(x.warn) h+=`<div class="warn-box">⚠️ ${x.warn}</div>`;
+    if(x.info) h+=`<div class="info-box">ℹ️ ${x.info}</div>`;
+  });
+  if(d.dosingNote) h+=`<div class="stop-box"><strong>⏱ Clinical Note</strong><p>${d.dosingNote}</p></div>`;
+  if(d.stopRule) h+=`<div class="stop-box" style="margin-top:8px"><strong>🛑 Stop / Reassessment Rule</strong><p>${d.stopRule}</p></div>`;
+  return h;
+}
+
+function sideHtml(d){
+  let h=`<div class="dsec"><div class="dsec-title">Key Side Effects</div>`;
+  h+=(d.side||[]).map(s=>`<div class="ditem">${s}</div>`).join('');
+  h+='</div>';
+  const bboxItems = (d.side||[]).filter(s=>s.toLowerCase().includes('black box'));
+  if(bboxItems.length) h+=`<div class="warn-box">⚠️ <strong>Black Box Warning:</strong> ${bboxItems[0].replace(/Black Box[^:]*:/i,'').trim()}</div>`;
+  return h;
+}
+
+function contraHtml(d){
+  let h=`<div class="dsec"><div class="dsec-title">Contraindications & Cautions</div>`;
+  h+=(d.contra||[]).map(c=>`<div class="ditem">${c}</div>`).join('');
+  h+='</div>';
+  return h;
+}
+
+function openDrug(id){
+  const d = getDrugById(id);
+  if(!d) return;
+  const g = GROUPS.find(g=>g.id===d.group);
+  state.openDrug=id;
+
+  // Header
+  document.getElementById('dsHdr').innerHTML=`
+    <div class="ds-grp-lbl" style="color:${g?g.color:'#64748B'}">${g?g.label:''}</div>
+    <div class="ds-name">${d.name}</div>
+    <div class="ds-brand">${d.brand}</div>
+    <div class="ds-badges">${d.badges.map(b=>`<span class="ds-badge ${b[0]}">${b[1]}</span>`).join('')}</div>
+  `;
+
+  // Efficacy strip
+  document.getElementById('dsEffStrip').innerHTML=`
+    <div class="eff-strip-l">
+      <div class="lbl">Approx. Efficacy</div>
+      <div class="val">${d.efficacy}</div>
+    </div>
+    <div class="eff-strip-r">Total body weight loss vs placebo (phase 3 data)</div>
+  `;
+
+  // Panels
+  document.getElementById('dpanel-dosing').innerHTML = dosingHtml(d);
+  document.getElementById('dpanel-side').innerHTML   = sideHtml(d);
+  document.getElementById('dpanel-contra').innerHTML = contraHtml(d);
+
+  // Reset tabs
+  state.activeDtab='dosing';
+  document.querySelectorAll('.dtab').forEach(t=>{
+    t.classList.toggle('on', t.dataset.tab==='dosing');
+  });
+  document.querySelectorAll('.dpanel').forEach(p=>{
+    p.classList.toggle('on', p.id==='dpanel-dosing');
+  });
+
+  openSheet('drugSheet');
+}
+
+// ══════════════════════════════════════════════════════════════════════
+// SHEET UTILS
+// ══════════════════════════════════════════════════════════════════════
+function openSheet(id){
+  document.getElementById('overlay').classList.add('on');
+  document.getElementById(id).classList.add('on');
+  document.body.style.overflow='hidden';
+}
+
+function closeAll(){
+  document.getElementById('overlay').classList.remove('on');
+  ['drugSheet','nsSheet'].forEach(id=>document.getElementById(id).classList.remove('on'));
+  document.body.style.overflow='';
+  state.openDrug=null;
+}
+
+// ══════════════════════════════════════════════════════════════════════
+// NEXT STEP TOOL
+// ══════════════════════════════════════════════════════════════════════
+function nsBodyHtml(){
+  const sel = state.nsSelected;
+  const eligible = DRUGS.filter(d=>d.group<=8); // exclude pipeline from "tried" list
+
+  let h = `<div class="ns-sec-t">Select all medications that have been tried and failed:</div>`;
+  h += `<div class="ns-list">`;
+  eligible.forEach(d=>{
+    const isSel = sel.has(d.id);
+    h += `<div class="ns-row${isSel?' sel':''}" data-nid="${d.id}">
+      <div class="ns-row-info">
+        <div class="nm">${d.name}</div>
+        <div class="br">${d.brand}</div>
+      </div>
+      <div class="ns-chk">${isSel?'✓':''}</div>
+    </div>`;
+  });
+  h += `</div>`;
+
+  if(sel.size===0){
+    h += `<div class="ns-empty"><div class="ico">💊</div><p>Select one or more medications above to see the next clinical recommendation.</p></div>`;
+  } else {
+    h += `<div class="divider"></div>`;
+    h += `<div class="ns-sec-t">Clinical Recommendation</div>`;
+    h += buildRec();
+  }
+  return h;
+}
+
+function buildRec(){
+  const sel = [...state.nsSelected];
+  // Find the most advanced drug tried (highest efficacy class)
+  const order = ['bupropion','metformin','topiramate','diethylpropion','phendimetrazine','benzphetamine',
+                  'phentermine','orlistat','contrave','qsymia','liraglutide','orforglipron','oralsema',
+                  'semaglutide','tirzepatide','setmelanotide'];
+  let best = null;
+  order.forEach(id=>{ if(sel.includes(id)) best=id; });
+  if(!best) best = sel[sel.length-1];
+
+  const rec = RECS[best];
+  if(!rec) return `<div class="ns-empty"><p>No recommendation available for selection.</p></div>`;
+
+  if(!rec.next){
+    return `<div class="rec-card">
+      <div class="rec-lbl">⚕ Clinical Note</div>
+      <div class="rec-name">Next Steps</div>
+      <div class="rec-why">${rec.why}</div>
+      <div class="rec-chk-box">
+        <div class="t">Suggested Actions</div>
+        ${(rec.contra_check||[]).map(c=>`<div class="rec-chk-item">${c}</div>`).join('')}
+      </div>
+    </div>`;
+  }
+
+  const nextDrug = getDrugById(rec.next);
+  if(!nextDrug) return '';
+
+  const prevNames = sel.map(id=>{const dd=getDrugById(id);return dd?dd.name:id}).join(', ');
+
+  let h = `<div class="rec-card">
+    <div class="rec-lbl">⚕ Recommended Next Agent</div>
+    <div class="rec-name">${nextDrug.name}</div>
+    <div class="rec-brand">${nextDrug.brand}</div>
+    <div class="rec-stats">
+      <div class="rec-stat"><div class="sl">Prior Agent(s)</div><div class="sv">${rec.prev_eff}</div></div>
+      <div class="rec-stat"><div class="sl">Expected Next</div><div class="sv">${rec.next_eff}</div></div>
+    </div>
+    <div class="rec-why">${rec.why}</div>
+    <div class="rec-chk-box">
+      <div class="t">Check Before Prescribing</div>
+      ${rec.contra_check.map(c=>`<div class="rec-chk-item">${c}</div>`).join('')}
+    </div>
+    <button class="btn-view" data-view="${rec.next}">View Full ${nextDrug.name} Profile →</button>
+  </div>`;
+
+  // Comparison table
+  h += `<div class="ns-sec-t" style="margin-top:4px">Comparison: Prior vs Recommended</div>`;
+  const prevD = getDrugById(best);
+  h += `<table class="cmp-tbl"><thead><tr><th>Category</th><th class="c-old">${prevD?prevD.name:'Prior'}</th><th class="c-new">${nextDrug.name}</th></tr></thead><tbody>`;
+  h += `<tr><td class="c-lbl">Mechanism</td><td>${prevD?prevD.class:'—'}</td><td>${nextDrug.class}</td></tr>`;
+  h += `<tr><td class="c-lbl">Approx. Efficacy</td><td class="c-old">${rec.prev_eff}</td><td class="c-new">${rec.next_eff}</td></tr>`;
+  h += `<tr><td class="c-lbl">Route / Freq.</td><td>${routeLabel(best)}</td><td>${routeLabel(rec.next)}</td></tr>`;
+  h += `<tr><td class="c-lbl">FDA Status</td><td>${prevD?prevD.fda:'—'}</td><td>${nextDrug.fda}</td></tr>`;
+  h += `</tbody></table>`;
+
+  return h;
+}
+
+function routeLabel(id){
+  const routes={
+    phentermine:'Oral, daily',diethylpropion:'Oral, daily',phendimetrazine:'Oral, daily',benzphetamine:'Oral, daily',
+    orlistat:'Oral, TID',qsymia:'Oral, daily',contrave:'Oral, BID',
+    liraglutide:'SC injection, daily',semaglutide:'SC injection, weekly',oralsema:'Oral, daily',
+    orforglipron:'Oral, daily',tirzepatide:'SC injection, weekly',setmelanotide:'SC injection, daily',
+    metformin:'Oral, daily–BID',topiramate:'Oral, BID',bupropion:'Oral, daily–BID',
+    cagrisema:'SC injection, weekly',retatrutide:'SC injection, weekly'
+  };
+  return routes[id]||'—';
+}
+
+function renderNsBody(){
+  document.getElementById('nsBody').innerHTML = nsBodyHtml();
+  // Row listeners
+  document.querySelectorAll('.ns-row').forEach(el=>{
+    el.addEventListener('click',()=>{
+      const id=el.dataset.nid;
+      if(state.nsSelected.has(id)) state.nsSelected.delete(id);
+      else state.nsSelected.add(id);
+      document.getElementById('fabBtn').classList.toggle('has-sel',state.nsSelected.size>0);
+      renderNsBody();
+    });
+  });
+  // View drug button
+  const vb = document.getElementById('nsBody').querySelector('[data-view]');
+  if(vb) vb.addEventListener('click',()=>{
+    closeAll();
+    setTimeout(()=>openDrug(vb.dataset.view),50);
+  });
+}
+
+// ══════════════════════════════════════════════════════════════════════
+// EVENTS
+// ══════════════════════════════════════════════════════════════════════
+document.getElementById('searchInput').addEventListener('input',function(){
+  state.search=this.value;
+  state.tab='all';
+  document.getElementById('searchX').style.display=this.value?'block':'none';
+  renderTabs(); renderDrugs();
+});
+document.getElementById('searchX').addEventListener('click',()=>{
+  state.search=''; document.getElementById('searchInput').value='';
+  document.getElementById('searchX').style.display='none';
+  renderDrugs();
+});
+document.getElementById('sheetClose').addEventListener('click',closeAll);
+document.getElementById('overlay').addEventListener('click',closeAll);
+document.querySelectorAll('.dtab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    state.activeDtab=tab.dataset.tab;
+    document.querySelectorAll('.dtab').forEach(t=>t.classList.toggle('on',t.dataset.tab===state.activeDtab));
+    document.querySelectorAll('.dpanel').forEach(p=>p.classList.toggle('on',p.id==='dpanel-'+state.activeDtab));
+  });
+});
+document.getElementById('fabBtn').addEventListener('click',()=>{
+  document.getElementById('overlay').classList.add('on');
+  document.getElementById('nsSheet').classList.add('on');
+  document.body.style.overflow='hidden';
+  renderNsBody();
+});
+document.getElementById('nsClose').addEventListener('click',closeAll);
+document.getElementById('infoBtn').addEventListener('click',()=>{
+  alert('AOM Quick Reference\nBariatric Centers of America · May 2026\n\nThis tool is for healthcare professional use only. Always verify against current FDA prescribing information before prescribing. Pipeline agents are NOT approved for clinical use.');
+});
+
+// ══════════════════════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════════════════════
+renderTabs();
+renderDrugs();
+</script>
+</body>
+</html>
